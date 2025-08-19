@@ -1,0 +1,24 @@
+{
+  "@@locale": "vi",
+
+  "appTitle": "Bữa Ăn Thông Minh",
+  "login": "Đăng nhập",
+  "register": "Đăng ký",
+  "fullName": "Tên đầy đủ",
+  "employeeId": "Mã nhân viên",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "forgotPassword": "Quên mật khẩu?",
+  "createAccount": "Tạo tài khoản",
+  "weeklyMeals": "Thực đơn tuần",
+  "todayMeals": "Bữa ăn hôm nay",
+  "breakfast": "Bữa sáng",
+  "lunch": "Bữa trưa",
+  "dinner": "Bữa tối",
+  "snack": "Đồ ăn vặt",
+  "requiredField": "Trường này là bắt buộc",
+  "invalidEmail": "Vui lòng nhập email hợp lệ",
+  "passwordTooShort": "Mật khẩu phải có ít nhất 6 ký tự",
+  "welcomeUser": "Chào mừng, {name}!",
+  "mealCount": "{count, plural, =0{Không có bữa ăn nào} =1{1 bữa ăn} other{{count} bữa ăn}}"
+}

@@ -1,0 +1,114 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Smart Meal",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+
+  "login": "Login",
+  "@login": {
+    "description": "Login button text"
+  },
+
+  "register": "Register",
+  "@register": {
+    "description": "Register button text"
+  },
+
+  "fullName": "FullName",
+  "@fullName": {
+    "description": "FullName field label"
+  },
+
+  "employeeId": "EmployeeId",
+  "@employeeId": {
+    "description": "FullName field label"
+  },
+
+  "password": "Password",
+  "@password": {
+    "description": "Password field label"
+  },
+
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Confirm password field label"
+  },
+
+  "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+    "description": "Forgot password link text"
+  },
+
+  "createAccount": "Create Account",
+  "@createAccount": {
+    "description": "Create account button text"
+  },
+
+  "weeklyMeals": "Weekly Meals",
+  "@weeklyMeals": {
+    "description": "Weekly meals screen title"
+  },
+
+  "todayMeals": "Today's Meals",
+  "@todayMeals": {
+    "description": "Today meals section title"
+  },
+
+  "breakfast": "Breakfast",
+  "@breakfast": {
+    "description": "Breakfast meal type"
+  },
+
+  "lunch": "Lunch",
+  "@lunch": {
+    "description": "Lunch meal type"
+  },
+
+  "dinner": "Dinner",
+  "@dinner": {
+    "description": "Dinner meal type"
+  },
+
+  "snack": "Snack",
+  "@snack": {
+    "description": "Snack meal type"
+  },
+
+  "requiredField": "This field is required",
+  "@requiredField": {
+    "description": "Validation message for required fields"
+  },
+
+  "invalidEmail": "Please enter a valid email",
+  "@invalidEmail": {
+    "description": "Validation message for invalid email"
+  },
+
+  "passwordTooShort": "Password must be at least 6 characters",
+  "@passwordTooShort": {
+    "description": "Validation message for short password"
+  },
+
+  "welcomeUser": "Welcome, {name}!",
+  "@welcomeUser": {
+    "description": "Welcome message with user name",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+
+  "mealCount": "{count, plural, =0{No meals} =1{1 meal} other{{count} meals}}",
+  "@mealCount": {
+    "description": "Display meal count with pluralization",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
+}
