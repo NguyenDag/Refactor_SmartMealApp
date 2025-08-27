@@ -5,9 +5,8 @@ import '../blocs/auth/login/login_bloc.dart';
 import '../blocs/auth/login/login_event.dart';
 import '../blocs/auth/login/login_state.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../constants/app_routes.dart';
+import '../l10n/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -139,7 +138,7 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     child: BlocBuilder<LoginBloc, LoginState>(
                       builder: (context, state) {
-                        final l10n = AppLocalizations.of(context)!;
+                        final l10n = AppLocalizations.of(context);
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,

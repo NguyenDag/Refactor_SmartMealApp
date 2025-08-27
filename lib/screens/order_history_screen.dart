@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/order_history_model.dart';
 import 'custom_app_drawer.dart';
 
@@ -23,6 +24,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFF7F7F7),
@@ -75,8 +77,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  const Text(
-                    'Lịch sử đặt món',
+                  Text(
+                    l10n.orderHistory,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -109,20 +111,13 @@ class HistoryTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
         // color: Color(0xFFF7F7F7),
         color: Color(0xFFF7F7F7),
         borderRadius: BorderRadius.circular(8.0),
-        /*boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],*/
       ),
       child: Column(
         children: [
@@ -135,15 +130,15 @@ class HistoryTable extends StatelessWidget {
                 topRight: Radius.circular(5),
               ),
             ),
-            child: const Row(
+            child: Row(
               children: [
                 Expanded(
                   flex: 1,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'STT',
-                      style: TextStyle(
+                      l10n.no1,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -154,10 +149,10 @@ class HistoryTable extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Tên món',
-                      style: TextStyle(
+                      l10n.dishName,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -168,10 +163,10 @@ class HistoryTable extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Ngày cung cấp',
-                      style: TextStyle(
+                      l10n.supplyDate,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -182,10 +177,10 @@ class HistoryTable extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Trạng thái',
-                      style: TextStyle(
+                      l10n.status,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,

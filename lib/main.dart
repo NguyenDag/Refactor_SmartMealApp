@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:smart_meal/constants/app_routes.dart';
 import 'package:smart_meal/constants/app_strings.dart';
-import 'package:smart_meal/constants/app_colors.dart';
 import 'package:smart_meal/screens/home/home_screen.dart';
 import 'package:smart_meal/screens/login_screen.dart';
 import 'package:smart_meal/screens/register_screen.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'l10n/app_localizations.dart';
 
 void main() {
   runApp(MyApp());

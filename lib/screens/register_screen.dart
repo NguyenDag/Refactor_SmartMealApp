@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/auth/register/register_bloc.dart';
 import '../blocs/auth/register/register_event.dart';
 import '../blocs/auth/register/register_state.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../l10n/app_localizations.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -43,12 +42,12 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
-          final l10n = AppLocalizations.of(context)!;
+          final l10n = AppLocalizations.of(context);
           if (state.status == RegisterStatus.success) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -57,9 +56,9 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             );
             // Navigate back to login after success
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.of(context).pop();
-            });
+              Future.delayed(const Duration(seconds: 1), () {
+                Navigator.of(context).pop();
+              });
           } else if (state.status == RegisterStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -154,7 +153,7 @@ class _RegisterViewState extends State<RegisterView> {
                           padding: const EdgeInsets.all(24),
                           child: BlocBuilder<RegisterBloc, RegisterState>(
                             builder: (context, state) {
-                              final l10n = AppLocalizations.of(context)!;
+                              final l10n = AppLocalizations.of(context);
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
