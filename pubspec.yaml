@@ -29,7 +29,7 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^5.0.0
-
+#  flutter_gen: ^5.3.2
 flutter:
   uses-material-design: true
 
@@ -38,7 +38,6 @@ flutter:
   assets:
     # Load toàn bộ thư mục images
     - assets/images/
-    - assets/translations/
 
     # Hoặc load từng file cụ thể
     #- assets/images/register_bg.jpg

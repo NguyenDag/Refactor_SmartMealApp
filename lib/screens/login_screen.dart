@@ -5,6 +5,10 @@ import '../blocs/auth/login/login_bloc.dart';
 import '../blocs/auth/login/login_event.dart';
 import '../blocs/auth/login/login_state.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../constants/app_routes.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -47,11 +51,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   void _navigateToForgotPassword() {
-    Navigator.of(context).pushNamed('/forgot-password');
+    Navigator.of(context).pushNamed(AppRoutes.forgotPassword);
   }
 
   void _navigateToCreateAccount() {
-    Navigator.of(context).pushNamed('/create-account');
+    Navigator.of(context).pushNamed(AppRoutes.register);
   }
 
   Widget _buildTextField({
@@ -135,14 +139,15 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     child: BlocBuilder<LoginBloc, LoginState>(
                       builder: (context, state) {
+                        final l10n = AppLocalizations.of(context)!;
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             // Header
-                            const Text(
-                              'Xin chào!',
-                              style: TextStyle(
+                            Text(
+                              l10n.loginTitle,
+                              style: const TextStyle(
                                 fontSize: 32,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -151,8 +156,8 @@ class _LoginViewState extends State<LoginView> {
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
-                            const Text(
-                              'Đăng nhập để tiếp tục',
+                            Text(
+                              l10n.subLoginTitle,
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Colors.black,
@@ -186,7 +191,7 @@ class _LoginViewState extends State<LoginView> {
                             // Username field
                             _buildTextField(
                               controller: _usernameController,
-                              placeholder: 'Tên đăng nhập',
+                              placeholder: l10n.placeholderUsername,
                               isPassword: false,
                               errorText: state.usernameError,
                             ),
@@ -195,7 +200,7 @@ class _LoginViewState extends State<LoginView> {
                             // Password field
                             _buildTextField(
                               controller: _passwordController,
-                              placeholder: 'Mật khẩu',
+                              placeholder: l10n.placeholderPassword,
                               isPassword: true,
                               errorText: state.passwordError,
                             ),
@@ -230,8 +235,8 @@ class _LoginViewState extends State<LoginView> {
                                                 ),
                                           ),
                                         )
-                                        : const Text(
-                                          'Login',
+                                        : Text(
+                                          l10n.login,
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600,
@@ -244,8 +249,8 @@ class _LoginViewState extends State<LoginView> {
                             // Forgot password link
                             TextButton(
                               onPressed: _navigateToForgotPassword,
-                              child: const Text(
-                                'Quên mật khẩu?',
+                              child: Text(
+                                l10n.forgotPassword,
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 12,
@@ -274,8 +279,8 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                     elevation: 0,
                                   ),
-                                  child: const Text(
-                                    'Tạo tài khoản mới',
+                                  child: Text(
+                                    l10n.createAccount,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w600,

@@ -5,6 +5,8 @@ import '../blocs/auth/register/register_bloc.dart';
 import '../blocs/auth/register/register_event.dart';
 import '../blocs/auth/register/register_state.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -41,14 +43,16 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
+          final l10n = AppLocalizations.of(context)!;
           if (state.status == RegisterStatus.success) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Đăng ký thành công!'),
+              SnackBar(
+                content: Text(l10n.successRegister),
                 backgroundColor: Colors.green,
               ),
             );
@@ -59,7 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
           } else if (state.status == RegisterStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.errorMessage ?? 'Đăng ký thất bại'),
+                content: Text(l10n.failRegister),
                 backgroundColor: Colors.red,
               ),
             );
@@ -107,17 +111,17 @@ class _RegisterViewState extends State<RegisterView> {
                             child: Container(
                               height: 100,
                               padding: const EdgeInsets.all(8),
-                              child: const Row(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_back_ios,
                                     color: Colors.white,
                                     size: 16,
                                   ),
                                   Text(
-                                    'Quay lại',
-                                    style: TextStyle(
+                                    l10n.comeBack,
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
@@ -150,13 +154,14 @@ class _RegisterViewState extends State<RegisterView> {
                           padding: const EdgeInsets.all(24),
                           child: BlocBuilder<RegisterBloc, RegisterState>(
                             builder: (context, state) {
+                              final l10n = AppLocalizations.of(context)!;
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // Title
-                                  const Center(
+                                  Center(
                                     child: Text(
-                                      'Tạo tài khoản mới',
+                                      l10n.createAccount,
                                       style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.bold,
@@ -173,12 +178,17 @@ class _RegisterViewState extends State<RegisterView> {
                                   // Full Name Field
                                   _buildTextField(
                                     controller: _fullNameController,
-                                    label: 'Tên đầy đủ',
-                                    placeholder: 'Tên đầy đủ',
+                                    placeholder: l10n.fullName,
                                     errorText: state.fieldErrors['fullName'],
                                     onChanged: (value) {
                                       context.read<RegisterBloc>().add(
-                                        FullNameChanged(value),
+                                        FullNameChanged(
+                                          value,
+                                          errorMessage:
+                                              value.isEmpty
+                                                  ? l10n.fullNameBlank
+                                                  : null,
+                                        ),
                                       );
                                     },
                                   ),
@@ -186,12 +196,17 @@ class _RegisterViewState extends State<RegisterView> {
                                   // Employee ID Field
                                   _buildTextField(
                                     controller: _employeeIdController,
-                                    label: 'Mã nhân viên',
-                                    placeholder: 'Mã nhân viên',
+                                    placeholder: l10n.employeeId,
                                     errorText: state.fieldErrors['employeeId'],
                                     onChanged: (value) {
                                       context.read<RegisterBloc>().add(
-                                        EmployeeIdChanged(value),
+                                        EmployeeIdChanged(
+                                          value,
+                                          emptyErrorMessage:
+                                              l10n.employeeIdBlank,
+                                          invalidErrorMessage:
+                                              l10n.employeeIdInvalid,
+                                        ),
                                       );
                                     },
                                   ),
@@ -199,12 +214,16 @@ class _RegisterViewState extends State<RegisterView> {
                                   // Username Field
                                   _buildTextField(
                                     controller: _usernameController,
-                                    label: 'Tên tài khoản',
-                                    placeholder: 'Tên tài khoản',
+                                    placeholder: l10n.accountName,
                                     errorText: state.fieldErrors['username'],
                                     onChanged: (value) {
                                       context.read<RegisterBloc>().add(
-                                        UsernameChanged(value),
+                                        UsernameChanged(
+                                          value,
+                                          emptyErrorMessage: l10n.usernameBlank,
+                                          invalidErrorMessage:
+                                              l10n.usernameInvalid,
+                                        ),
                                       );
                                     },
                                   ),
@@ -212,13 +231,17 @@ class _RegisterViewState extends State<RegisterView> {
                                   // Password Field
                                   _buildTextField(
                                     controller: _passwordController,
-                                    label: 'Mật khẩu',
-                                    placeholder: 'Mật khẩu',
+                                    placeholder: l10n.password,
                                     isPassword: true,
                                     errorText: state.fieldErrors['password'],
                                     onChanged: (value) {
                                       context.read<RegisterBloc>().add(
-                                        PasswordChanged(value),
+                                        PasswordChanged(
+                                          value,
+                                          emptyErrorMessage: l10n.passwordBlank,
+                                          tooShortErrorMessage:
+                                              l10n.passwordTooShort,
+                                        ),
                                       );
                                     },
                                   ),
@@ -263,8 +286,8 @@ class _RegisterViewState extends State<RegisterView> {
                                                       >(Colors.white),
                                                 ),
                                               )
-                                              : const Text(
-                                                'Đăng ký',
+                                              : Text(
+                                                l10n.register,
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w600,
@@ -291,7 +314,6 @@ class _RegisterViewState extends State<RegisterView> {
 
   Widget _buildTextField({
     required TextEditingController controller,
-    required String label,
     required String placeholder,
     required Function(String) onChanged,
     String? errorText,

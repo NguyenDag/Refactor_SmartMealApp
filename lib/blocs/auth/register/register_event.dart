@@ -26,8 +26,9 @@ abstract class RegisterEvent extends Equatable {
 
 class FullNameChanged extends RegisterEvent {
   final String fullName;
+  final String? errorMessage;
 
-  const FullNameChanged(this.fullName);
+  const FullNameChanged(this.fullName, {this.errorMessage});
 
   @override
   List<Object> get props => [fullName];
@@ -35,8 +36,14 @@ class FullNameChanged extends RegisterEvent {
 
 class EmployeeIdChanged extends RegisterEvent {
   final String employeeId;
+  final String? emptyErrorMessage;
+  final String? invalidErrorMessage;
 
-  const EmployeeIdChanged(this.employeeId);
+  const EmployeeIdChanged(
+    this.employeeId, {
+    this.emptyErrorMessage,
+    this.invalidErrorMessage,
+  });
 
   @override
   List<Object> get props => [employeeId];
@@ -44,8 +51,14 @@ class EmployeeIdChanged extends RegisterEvent {
 
 class UsernameChanged extends RegisterEvent {
   final String username;
+  final String? emptyErrorMessage;
+  final String? invalidErrorMessage;
 
-  const UsernameChanged(this.username);
+  const UsernameChanged(
+    this.username, {
+    this.emptyErrorMessage,
+    this.invalidErrorMessage,
+  });
 
   @override
   List<Object> get props => [username];
@@ -53,15 +66,37 @@ class UsernameChanged extends RegisterEvent {
 
 class PasswordChanged extends RegisterEvent {
   final String password;
+  final String? emptyErrorMessage;
+  final String? tooShortErrorMessage;
 
-  const PasswordChanged(this.password);
+  const PasswordChanged(
+    this.password, {
+    this.emptyErrorMessage,
+    this.tooShortErrorMessage,
+  });
 
   @override
   List<Object> get props => [password];
 }
 
 class RegisterSubmitted extends RegisterEvent {
-  const RegisterSubmitted();
+  final String? fullNameError;
+  final String? emptyEIdError;
+  final String? invalidEIdError;
+  final String? emptyUsernameError;
+  final String? invalidUsernameError;
+  final String? emptyPasswordError;
+  final String? tooShortPasswordError;
+
+  const RegisterSubmitted({
+    this.fullNameError,
+    this.emptyEIdError,
+    this.invalidEIdError,
+    this.emptyUsernameError,
+    this.invalidUsernameError,
+    this.emptyPasswordError,
+    this.tooShortPasswordError,
+  });
 }
 
 class BackToLoginPressed extends RegisterEvent {

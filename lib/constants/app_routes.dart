@@ -4,7 +4,7 @@ class AppRoutes {
 
   // Auth routes
   static const String login = '/';
-  static const String register = '/register';
+  static const String register = '/create-account';
   static const String forgotPassword = '/forgot-password';
 
   // Main app routes

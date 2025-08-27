@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_meal/screens/statistic_screen.dart';
 
-import 'home_screen.dart';
+import 'home/home_screen.dart';
 import 'login_screen.dart';
 import 'order_history_screen.dart';
 

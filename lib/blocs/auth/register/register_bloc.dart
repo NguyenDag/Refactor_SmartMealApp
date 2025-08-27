@@ -14,8 +14,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   void _onFullNameChanged(FullNameChanged event, Emitter<RegisterState> emit) {
     final fieldErrors = Map<String, String>.from(state.fieldErrors);
-    if (event.fullName.isEmpty) {
-      fieldErrors['fullName'] = 'Tên đầy đủ không được để trống';
+    if (event.fullName.isEmpty && event.errorMessage != null) {
+      fieldErrors['fullName'] = event.errorMessage!;
     } else {
       fieldErrors.remove('fullName');
     }
@@ -29,7 +29,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ) {
     final fieldErrors = Map<String, String>.from(state.fieldErrors);
     if (event.employeeId.isEmpty) {
-      fieldErrors['employeeId'] = 'Mã nhân viên không được để trống';
+      fieldErrors['employeeId'] = event.emptyErrorMessage!;
+    } else if (event.employeeId != '12345' && event.employeeId != '67890') {
+      fieldErrors['employeeId'] = event.invalidErrorMessage!;
     } else {
       fieldErrors.remove('employeeId');
     }
@@ -42,7 +44,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   void _onUsernameChanged(UsernameChanged event, Emitter<RegisterState> emit) {
     final fieldErrors = Map<String, String>.from(state.fieldErrors);
     if (event.username.isEmpty) {
-      fieldErrors['username'] = 'Tên tài khoản không được để trống';
+      fieldErrors['username'] = event.emptyErrorMessage!;
+    } else if (event.username.toLowerCase() == 'admin' ||
+        event.username.toLowerCase() == 'user') {
+      fieldErrors['username'] = event.invalidErrorMessage!;
     } else {
       fieldErrors.remove('username');
     }
@@ -53,9 +58,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   void _onPasswordChanged(PasswordChanged event, Emitter<RegisterState> emit) {
     final fieldErrors = Map<String, String>.from(state.fieldErrors);
     if (event.password.isEmpty) {
-      fieldErrors['password'] = 'Mật khẩu không được để trống';
+      fieldErrors['password'] = event.emptyErrorMessage!;
     } else if (event.password.length < 6) {
-      fieldErrors['password'] = 'Mật khẩu phải có ít nhất 6 ký tự';
+      fieldErrors['password'] = event.tooShortErrorMessage!;
     } else {
       fieldErrors.remove('password');
     }
@@ -71,18 +76,20 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       final fieldErrors = <String, String>{};
 
       if (state.fullName.isEmpty) {
-        fieldErrors['fullName'] = 'Tên đầy đủ không được để trống';
+        fieldErrors['fullName'] = event.fullNameError!;
       }
       if (state.employeeId.isEmpty) {
-        fieldErrors['employeeId'] = 'Mã nhân viên không được để trống';
+        fieldErrors['employeeId'] = event.emptyEIdError!;
+      } else if (state.employeeId != '12345' && state.employeeId != '67890') {
+        fieldErrors['employeeId'] = event.invalidEIdError!;
       }
       if (state.username.isEmpty) {
-        fieldErrors['username'] = 'Tên tài khoản không được để trống';
+        fieldErrors['username'] = event.emptyUsernameError!;
       }
       if (state.password.isEmpty) {
-        fieldErrors['password'] = 'Mật khẩu không được để trống';
+        fieldErrors['password'] = event.emptyPasswordError!;
       } else if (state.password.length < 6) {
-        fieldErrors['password'] = 'Mật khẩu phải có ít nhất 6 ký tự';
+        fieldErrors['password'] = event.tooShortPasswordError!;
       }
 
       emit(state.copyWith(fieldErrors: fieldErrors));
@@ -107,11 +114,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         return;
       }
 
-      if (state.employeeId == '12345' || state.employeeId == '67890') {
+      if (state.employeeId != '12345' && state.employeeId != '67890') {
         emit(
           state.copyWith(
             status: RegisterStatus.failure,
-            errorMessage: 'Mã nhân viên đã được sử dụng',
+            errorMessage: 'Mã nhân viên không hợp lệ',
           ),
         );
         return;
