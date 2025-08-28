@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/auth/register/register_bloc.dart';
 import '../blocs/auth/register/register_event.dart';
 import '../blocs/auth/register/register_state.dart';
+import '../constants/app_colors.dart';
 import '../l10n/app_localizations.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -52,18 +53,18 @@ class _RegisterViewState extends State<RegisterView> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(l10n.successRegister),
-                backgroundColor: Colors.green,
+                backgroundColor: AppColors.success,
               ),
             );
             // Navigate back to login after success
-              Future.delayed(const Duration(seconds: 1), () {
-                Navigator.of(context).pop();
-              });
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.of(context).pop();
+            });
           } else if (state.status == RegisterStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(l10n.failRegister),
-                backgroundColor: Colors.red,
+                backgroundColor: AppColors.error,
               ),
             );
           }
@@ -78,15 +79,6 @@ class _RegisterViewState extends State<RegisterView> {
                 image: DecorationImage(
                   image: AssetImage('assets/images/image_register.jpg'),
                   fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.black26, Colors.transparent],
-                  ),
                 ),
               ),
             ),
@@ -115,13 +107,13 @@ class _RegisterViewState extends State<RegisterView> {
                                 children: [
                                   const Icon(
                                     Icons.arrow_back_ios,
-                                    color: Colors.white,
+                                    color: AppColors.onPrimary,
                                     size: 16,
                                   ),
                                   Text(
                                     l10n.comeBack,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: AppColors.onPrimary,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -139,11 +131,11 @@ class _RegisterViewState extends State<RegisterView> {
                       child: Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.card,
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black12,
+                              color: AppColors.boxShadow,
                               blurRadius: 30,
                               offset: const Offset(0, 5),
                             ),
@@ -164,13 +156,13 @@ class _RegisterViewState extends State<RegisterView> {
                                       style: TextStyle(
                                         fontSize: 28,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xFF00AD23),
+                                        color: AppColors.textTitle,
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 18),
                                   const Divider(
-                                    color: Colors.green,
+                                    color: AppColors.secondaryDivider,
                                     thickness: 1,
                                   ),
                                   const SizedBox(height: 18),
@@ -261,10 +253,9 @@ class _RegisterViewState extends State<RegisterView> {
                                                     );
                                               },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(
-                                          0xFF00A1CD,
-                                        ),
-                                        foregroundColor: Colors.white,
+                                        backgroundColor:
+                                            AppColors.primaryButton,
+                                        foregroundColor: AppColors.onPrimary,
                                         elevation: 0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(
@@ -282,7 +273,7 @@ class _RegisterViewState extends State<RegisterView> {
                                                   valueColor:
                                                       AlwaysStoppedAnimation<
                                                         Color
-                                                      >(Colors.white),
+                                                      >(AppColors.white),
                                                 ),
                                               )
                                               : Text(
@@ -327,25 +318,33 @@ class _RegisterViewState extends State<RegisterView> {
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: placeholder,
-            hintStyle: TextStyle(color: Colors.grey[500], fontSize: 12),
+            hintStyle: TextStyle(
+              color: AppColors.placeholderText,
+              fontSize: 12,
+            ),
             filled: true,
-            fillColor: Colors.grey[50],
+            fillColor: AppColors.background,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.black,
+                color:
+                    errorText != null ? AppColors.error : AppColors.blackBorder,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : Colors.black,
+                color:
+                    errorText != null ? AppColors.error : AppColors.blackBorder,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                color: errorText != null ? Colors.red : const Color(0xFF00BCD4),
+                color:
+                    errorText != null
+                        ? AppColors.error
+                        : AppColors.successBorder,
                 width: 2,
               ),
             ),
@@ -354,14 +353,14 @@ class _RegisterViewState extends State<RegisterView> {
               vertical: 6,
             ),
           ),
-          style: const TextStyle(fontSize: 16, color: Colors.black87),
+          style: const TextStyle(fontSize: 16, color: AppColors.textPrimary),
         ),
         if (errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 4, left: 4),
             child: Text(
               errorText,
-              style: const TextStyle(color: Colors.red, fontSize: 12),
+              style: const TextStyle(color: AppColors.error, fontSize: 12),
             ),
           ),
       ],

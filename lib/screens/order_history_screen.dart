@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../models/order_history_model.dart';
-import 'custom_app_drawer.dart';
+import '../widgets/common/custom_app_drawer.dart';
 
 class OrderHistoryScreen extends StatefulWidget {
   const OrderHistoryScreen({super.key});
@@ -35,8 +35,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
             icon: const Icon(Icons.location_on, color: Colors.orange),
             onPressed: () {},
           ),
-          title: const Text(
-            'ĐẶT CƠM',
+          title: Text(
+            l10n.appTitle,
             style: TextStyle(
               fontSize: 16,
               color: Colors.white,

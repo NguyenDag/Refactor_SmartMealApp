@@ -4,8 +4,10 @@ import 'package:smart_meal/blocs/meal/statistic/statistic_state.dart';
 
 import '../blocs/meal/statistic/statistic_bloc.dart';
 import '../blocs/meal/statistic/statistic_event.dart';
+import '../constants/app_colors.dart';
+import '../l10n/app_localizations.dart';
 import '../models/statistic_model.dart';
-import 'custom_app_drawer.dart';
+import '../widgets/common/custom_app_drawer.dart';
 
 class StatisticScreen extends StatelessWidget {
   const StatisticScreen({super.key});
@@ -35,6 +37,7 @@ class _StatisticViewState extends State<StatisticView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFF7F7F7),
@@ -46,10 +49,10 @@ class _StatisticViewState extends State<StatisticView> {
             onPressed: () {},
           ),
           title: Text(
-            'ĐẶT CƠM',
+            l10n.appTitle,
             style: TextStyle(
               fontSize: 16,
-              color: Colors.white,
+              color: AppColors.onPrimary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -73,13 +76,13 @@ class _StatisticViewState extends State<StatisticView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
+                  Row(
                     children: [
-                      Icon(Icons.assessment, color: Colors.green),
-                      SizedBox(width: 8),
+                      const Icon(Icons.assessment, color: Colors.green),
+                      const SizedBox(width: 8),
                       Text(
-                        'Thống kê suất ăn',
-                        style: TextStyle(
+                        l10n.mealStatistics,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                           color: Colors.black,
@@ -95,9 +98,9 @@ class _StatisticViewState extends State<StatisticView> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Text(
-                        'Tháng',
-                        style: TextStyle(
+                      Text(
+                        l10n.month,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),
@@ -139,9 +142,9 @@ class _StatisticViewState extends State<StatisticView> {
 
                       const SizedBox(width: 12),
 
-                      const Text(
-                        'Năm',
-                        style: TextStyle(
+                      Text(
+                        l10n.year,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),
@@ -198,9 +201,9 @@ class _StatisticViewState extends State<StatisticView> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                           ),
-                          child: const Text(
-                            'Tìm kiếm',
-                            style: TextStyle(fontSize: 12),
+                          child: Text(
+                            l10n.search,
+                            style: const TextStyle(fontSize: 12),
                           ),
                         ),
                       ),
@@ -241,7 +244,17 @@ class _StatisticViewState extends State<StatisticView> {
                             child: Row(
                               children: [
                                 Text(
-                                  'Tổng tiền trong tháng: ${state.totalAmount.toInt().toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.')} VNĐ',
+                                  l10n.totalAmount(
+                                    state.totalAmount
+                                        .toInt()
+                                        .toString()
+                                        .replaceAllMapped(
+                                          RegExp(
+                                            r'(\d{1,3})(?=(\d{3})+(?!\d))',
+                                          ),
+                                          (Match m) => '${m[1]}.',
+                                        ),
+                                  ),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
@@ -254,7 +267,7 @@ class _StatisticViewState extends State<StatisticView> {
                       );
                     }
 
-                    return const Center(child: Text('Chưa có dữ liệu'));
+                    return Center(child: Text(l10n.noData));
                   },
                 ),
               ),
@@ -273,6 +286,7 @@ class StatisticTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
@@ -298,15 +312,15 @@ class StatisticTable extends StatelessWidget {
                 topRight: Radius.circular(8.0),
               ),
             ),
-            child: const Row(
+            child: Row(
               children: [
                 Expanded(
                   flex: 5,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'STT',
-                      style: TextStyle(
+                      l10n.no1,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -317,10 +331,10 @@ class StatisticTable extends StatelessWidget {
                 Expanded(
                   flex: 10,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Tên món',
-                      style: TextStyle(
+                      l10n.dishName,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -331,10 +345,10 @@ class StatisticTable extends StatelessWidget {
                 Expanded(
                   flex: 11,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Giá (VNĐ)',
-                      style: TextStyle(
+                      l10n.amount,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
@@ -345,10 +359,10 @@ class StatisticTable extends StatelessWidget {
                 Expanded(
                   flex: 10,
                   child: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Ngày cung cấp',
-                      style: TextStyle(
+                      l10n.supplyDate,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 12,

@@ -4,6 +4,8 @@ class AppColors {
   // Private constructor
   AppColors._();
 
+  static const Color white = Color(0xFFFFFFFF);
+
   // Primary colors
   // Màu chính của brand (AppBar, Button chính, FAB)
   static const Color seedColor = Color(0xFFFFFFFF);
@@ -21,10 +23,10 @@ class AppColors {
   static const Color linkColor = Color(0xFF549496);
 
   static const Color iconColor = Color(0xFFFD7555);
+  static const Color whiteIconColor = Color(0xFFFFFFFF);
 
   // Secondary colors
   // Màu phụ để highlight, tạo accent (Links, Switch, highlights)
-
   static const Color secondaryLight = Color(0xFF66FFF9);
   static const Color secondaryDark = Color(0xFF00A896);
 
@@ -44,6 +46,7 @@ class AppColors {
   // Text colors
   static const Color textPrimary = Color(0xFF000000);
   static const Color textSecondary = Color(0xFF757575);
+  static const Color textTitle = Color(0xFF00B023);
   static Color textDisabled = Colors.black.withValues(alpha: 0.3);
 
   // Status colors
@@ -55,4 +58,12 @@ class AppColors {
   // Border and divider
   static const Color primaryDivider = Color(0xFF000000);
   static const Color secondaryDivider = Color(0xFF00B023);
+  static Color border = Colors.grey.shade300;
+  static Color blackBorder = Colors.grey.shade300;
+  static const Color successBorder = Color(0xFF00BCD4);
+  static Color errorBorder = Colors.red.shade200;
+  static Color errorBackground = Colors.red.shade50;
+  static Color placeholderText = Colors.grey.shade500;
+
+  static Color boxShadow = Colors.black12;
 }
