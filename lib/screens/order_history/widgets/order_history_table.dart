@@ -1,131 +1,31 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
-import '../models/order_history_model.dart';
-import '../widgets/common/custom_app_drawer.dart';
 
-class OrderHistoryScreen extends StatefulWidget {
-  const OrderHistoryScreen({super.key});
+import '../../../constants/app_colors.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../models/order_history_model.dart';
 
-  @override
-  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
-}
-
-class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
-  final List<OrderHistory> orderHistory = List.generate(
-    30,
-    (index) => OrderHistory(
-      id: index + 1,
-      dishName:
-          ['Cơm gà', 'Miến xào', 'Cơm trộn', 'Mỳ xào', 'Cơm tấm'][index % 5],
-      supplyDate: ['4/8/2025', '3/8/2025', '1/8/2025', '30/7/2025'][index % 4],
-      status: 'Đã đặt',
-    ),
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xFFF7F7F7),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF2D3748),
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.location_on, color: Colors.orange),
-            onPressed: () {},
-          ),
-          title: Text(
-            l10n.appTitle,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            Builder(
-              builder:
-                  (context) => IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-            ),
-          ],
-        ),
-        endDrawer: CustomAppDrawer(),
-        body: Column(
-          children: [
-            // Header với icon lịch sử và tiêu đề
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      // borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.history,
-                      color: Colors.blue,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    l10n.orderHistory,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-
-            Divider(thickness: 1, color: Color(0xFF093200)),
-
-            const SizedBox(height: 8),
-
-            Expanded(child: HistoryTable(orderHistory: orderHistory)),
-
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HistoryTable extends StatelessWidget {
+class OrderHistoryTable extends StatelessWidget {
   final List<OrderHistory> orderHistory;
 
-  const HistoryTable({super.key, required this.orderHistory});
+  const OrderHistoryTable({super.key, required this.orderHistory});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        // color: Color(0xFFF7F7F7),
-        color: Color(0xFFF7F7F7),
+        color: AppColors.card,
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         children: [
           // Table header
           Container(
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: AppColors.headerHistoryTable,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(5),
                 topRight: Radius.circular(5),
               ),
@@ -208,17 +108,17 @@ class HistoryTable extends StatelessWidget {
                           color: Color(0xFFFFFFFF),
                           border: Border(
                             bottom: BorderSide(
-                              color: Color(0xFF000000),
+                              color: AppColors.blackBorder,
                               width: 1,
                             ),
                           ),
                           borderRadius:
-                              index == orderHistory.length - 1
-                                  ? BorderRadius.only(
-                                    bottomLeft: Radius.circular(5.0),
-                                    bottomRight: Radius.circular(5.0),
-                                  )
-                                  : null,
+                          index == orderHistory.length - 1
+                              ? BorderRadius.only(
+                            bottomLeft: Radius.circular(5.0),
+                            bottomRight: Radius.circular(5.0),
+                          )
+                              : null,
                         ),
                         child: Row(
                           children: [
@@ -230,7 +130,7 @@ class HistoryTable extends StatelessWidget {
                                   order.id.toString(),
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Colors.black87,
+                                    color: AppColors.textPrimary,
                                   ),
                                 ),
                               ),
@@ -243,7 +143,7 @@ class HistoryTable extends StatelessWidget {
                                   order.dishName,
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Colors.black87,
+                                    color: AppColors.textPrimary,
                                   ),
                                 ),
                               ),
@@ -256,7 +156,7 @@ class HistoryTable extends StatelessWidget {
                                   order.supplyDate,
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Colors.black87,
+                                    color: AppColors.textPrimary,
                                   ),
                                 ),
                               ),
@@ -269,7 +169,7 @@ class HistoryTable extends StatelessWidget {
                                   order.status,
                                   style: const TextStyle(
                                     fontSize: 12,
-                                    color: Colors.black87,
+                                    color: AppColors.textPrimary,
                                   ),
                                 ),
                               ),

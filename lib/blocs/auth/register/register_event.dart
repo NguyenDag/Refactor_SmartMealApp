@@ -80,6 +80,11 @@ class PasswordChanged extends RegisterEvent {
 }
 
 class RegisterSubmitted extends RegisterEvent {
+  final String fullName;
+  final String employeeId;
+  final String username;
+  final String password;
+
   final String? fullNameError;
   final String? emptyEIdError;
   final String? invalidEIdError;
@@ -89,6 +94,10 @@ class RegisterSubmitted extends RegisterEvent {
   final String? tooShortPasswordError;
 
   const RegisterSubmitted({
+    required this.fullName,
+    required this.employeeId,
+    required this.username,
+    required this.password,
     this.fullNameError,
     this.emptyEIdError,
     this.invalidEIdError,

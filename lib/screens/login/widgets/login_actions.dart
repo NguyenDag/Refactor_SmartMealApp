@@ -84,7 +84,7 @@ class LoginButton extends StatelessWidget {
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      AppColors.seedColor,
+                      AppColors.secondaryBackground,
                     ),
                   ),
                 )

@@ -8,7 +8,6 @@ class AppColors {
 
   // Primary colors
   // Màu chính của brand (AppBar, Button chính, FAB)
-  static const Color seedColor = Color(0xFFFFFFFF);
   static const Color primaryButton = Color(0xFF00A1CD);
   static const Color secondaryButton = Color(0xFF00B023);
 
@@ -24,6 +23,7 @@ class AppColors {
 
   static const Color iconColor = Color(0xFFFD7555);
   static const Color whiteIconColor = Color(0xFFFFFFFF);
+  static const Color blueIconColor = Colors.blue;
 
   // Secondary colors
   // Màu phụ để highlight, tạo accent (Links, Switch, highlights)
@@ -34,6 +34,7 @@ class AppColors {
   //Màu nền các component (Card, Dialog, Scaffold background)
   static const Color surface = Color(0x6DFF9800);
   static const Color background = Color(0xFFF7F7F7);
+  static const Color secondaryBackground = Color(0xFFFFFFFF);
   static const Color card = Color(0xFFFFFFFF);
 
   // On colors
@@ -59,11 +60,16 @@ class AppColors {
   static const Color primaryDivider = Color(0xFF000000);
   static const Color secondaryDivider = Color(0xFF00B023);
   static Color border = Colors.grey.shade300;
-  static Color blackBorder = Colors.grey.shade300;
+  static const Color whiteBorder = Color(0xFFFFFFFF);
+  static Color blackBorder = Color(0xFF000000);
   static const Color successBorder = Color(0xFF00BCD4);
   static Color errorBorder = Colors.red.shade200;
   static Color errorBackground = Colors.red.shade50;
   static Color placeholderText = Colors.grey.shade500;
 
   static Color boxShadow = Colors.black12;
+
+  // table
+  static Color headerHistoryTable = Color(0xFF00B023);
+  static Color headerStatisticTable = Color(0xFF4E89FF);
 }

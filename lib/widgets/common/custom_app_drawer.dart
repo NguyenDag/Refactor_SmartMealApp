@@ -3,7 +3,7 @@ import 'package:smart_meal/screens/statistic_screen.dart';
 
 import '../../screens/home/home_screen.dart';
 import '../../screens/login/login_screen.dart';
-import '../../screens/order_history_screen.dart';
+import '../../screens/order_history/order_history_screen.dart';
 
 class CustomAppDrawer extends StatelessWidget {
   const CustomAppDrawer({super.key});

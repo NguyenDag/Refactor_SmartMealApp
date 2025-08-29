@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/blocs/meal/statistic/statistic_state.dart';
+import 'package:smart_meal/widgets/common/custom_app_bar.dart';
 
 import '../blocs/meal/statistic/statistic_bloc.dart';
 import '../blocs/meal/statistic/statistic_event.dart';
-import '../constants/app_colors.dart';
 import '../l10n/app_localizations.dart';
 import '../models/statistic_model.dart';
 import '../widgets/common/custom_app_drawer.dart';
@@ -41,33 +41,7 @@ class _StatisticViewState extends State<StatisticView> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFF7F7F7),
-        appBar: AppBar(
-          backgroundColor: Color(0xFF2D3748),
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.location_on, color: Colors.orange),
-            onPressed: () {},
-          ),
-          title: Text(
-            l10n.appTitle,
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.onPrimary,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            Builder(
-              builder:
-                  (context) => IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                  ),
-            ),
-          ],
-        ),
+        appBar: const CustomAppBar(),
         endDrawer: CustomAppDrawer(),
         body: Column(
           children: [

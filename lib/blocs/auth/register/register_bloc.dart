@@ -72,23 +72,32 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     RegisterSubmitted event,
     Emitter<RegisterState> emit,
   ) async {
+    final fullName = event.fullName.trim();
+    final employeeId = event.employeeId.trim();
+    final username = event.username.trim();
+    final password = event.password.trim();
+
     if (!state.isFormValid) {
       final fieldErrors = <String, String>{};
 
-      if (state.fullName.isEmpty) {
-        fieldErrors['fullName'] = event.fullNameError!;
+      if (fullName.isEmpty) {
+        // fieldErrors['fullName'] = event.fullNameError!;
+        fieldErrors['fullName'] = "Vui lòng nhập họ tên";
       }
-      if (state.employeeId.isEmpty) {
-        fieldErrors['employeeId'] = event.emptyEIdError!;
-      } else if (state.employeeId != '12345' && state.employeeId != '67890') {
+      if (employeeId.isEmpty) {
+        // fieldErrors['employeeId'] = event.emptyEIdError!;
+        fieldErrors['employeeId'] = "Vui lòng nhập mã nhân viên";
+      } else if (employeeId != '12345' && employeeId != '67890') {
         fieldErrors['employeeId'] = event.invalidEIdError!;
       }
-      if (state.username.isEmpty) {
+      if (username.isEmpty) {
         fieldErrors['username'] = event.emptyUsernameError!;
+      } else if (username.toLowerCase() == 'admin') {
+        fieldErrors['username'] = event.invalidUsernameError!;
       }
-      if (state.password.isEmpty) {
+      if (password.isEmpty) {
         fieldErrors['password'] = event.emptyPasswordError!;
-      } else if (state.password.length < 6) {
+      } else if (password.length < 6) {
         fieldErrors['password'] = event.tooShortPasswordError!;
       }
 
@@ -100,7 +109,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     try {
       // Simulate API call
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
 
       // Simulate validation for unique username and employee ID
       if (state.username.toLowerCase() == 'admin' ||
@@ -141,5 +150,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     Emitter<RegisterState> emit,
   ) {
     // Navigation will be handled in the UI layer
+    emit(state.copyWith(status: RegisterStatus.initial));
   }
 }

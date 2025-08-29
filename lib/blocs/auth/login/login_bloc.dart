@@ -6,6 +6,7 @@ import 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(const LoginState()) {
     on<LoginSubmitted>(_onLoginSubmitted);
+    on<LoginReset>(_onLoginReset);
     on<LoginUsernameChanged>(_onLoginUsernameChanged);
     on<LoginPasswordChanged>(_onLoginPasswordChanged);
     on<UsernameLoaded>(_onUsernameLoaded);
@@ -76,6 +77,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  void _onLoginReset(LoginReset event, Emitter<LoginState> emit) {
+    emit(state.copyWith(status: LoginStatus.initial));
+  }
+
   void _onLoginUsernameChanged(
     LoginUsernameChanged event,
     Emitter<LoginState> emit,
@@ -113,10 +118,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   // lấy thông tin account được lưu trong SharedPreferences
-  void _onUsernameLoaded(
-    UsernameLoaded event,
-    Emitter<LoginState> emit,
-  ) {
+  void _onUsernameLoaded(UsernameLoaded event, Emitter<LoginState> emit) {
     emit(state.copyWith(status: LoginStatus.initial));
   }
 }

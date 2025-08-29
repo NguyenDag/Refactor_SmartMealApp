@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/auth/login/login_bloc.dart';
 import '../../../blocs/auth/login/login_event.dart';
 import '../../../blocs/auth/login/login_state.dart';
+import '../../../constants/app_routes.dart';
 import 'login_card.dart';
 
 class LoginView extends StatefulWidget {
@@ -38,7 +39,7 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state.status == LoginStatus.success) {
-          Navigator.of(context).pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacementNamed(AppRoutes.home);
         }
       },
       child: Container(
