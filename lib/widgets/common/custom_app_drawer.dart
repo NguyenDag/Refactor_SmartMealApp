@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_meal/screens/statistic_screen.dart';
+import 'package:smart_meal/screens/statistic/statistic_screen.dart';
 
 import '../../screens/home/home_screen.dart';
 import '../../screens/login/login_screen.dart';

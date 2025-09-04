@@ -16,7 +16,7 @@ class TableRow extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
         border: Border(
-          bottom: BorderSide(color: AppColors.blackBorder, width: 1),
+          bottom: BorderSide(color: AppColors.blackBorder , width: 1),
         ),
         borderRadius:
             isLastItem

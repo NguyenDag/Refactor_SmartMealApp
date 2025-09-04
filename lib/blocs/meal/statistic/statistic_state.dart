@@ -38,6 +38,7 @@ class StatisticError extends StatisticState {
   @override
   List<Object> get props => [message];
 }
+
 /*
 class StatisticSearchSuccess extends StatisticState {
   final List<Statistic> statistics;

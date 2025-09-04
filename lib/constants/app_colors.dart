@@ -72,4 +72,7 @@ class AppColors {
   // table
   static Color headerHistoryTable = Color(0xFF00B023);
   static Color headerStatisticTable = Color(0xFF4E89FF);
+
+  static Color rowEvenStatisticTable = Color(0xFFEEEEEE);
+  static Color rowOddStatisticTable = Color(0xFFFFFFFF);
 }

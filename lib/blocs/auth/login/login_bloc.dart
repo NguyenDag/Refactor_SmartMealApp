@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../services/login_service.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -16,14 +17,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    /*emit(state.copyWith(status: LoginStatus.loading));
-    try {
-      await _login(event.username, event.password);
-      emit(state.copyWith(status: LoginStatus.success));
-    } catch (e) {
-      emit(state.copyWith(status: LoginStatus.failure));
-    }*/
-
     final username = event.username.trim();
     final password = event.password.trim();
 
@@ -55,15 +48,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
 
     try {
-      await Future.delayed(const Duration(seconds: 2));
+      final errorMessage = await LoginService.loginAuth(username, password);
 
-      if (username == "admin" && password == "123") {
+      //login success
+      if (errorMessage == null) {
         emit(state.copyWith(status: LoginStatus.success));
       } else {
         emit(
           state.copyWith(
             status: LoginStatus.failure,
-            generalError: "Tên đăng nhập hoặc mật khẩu không đúng",
+            generalError: errorMessage,
+            usernameError: null,
+            passwordError: null,
           ),
         );
       }
@@ -72,6 +68,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         state.copyWith(
           status: LoginStatus.failure,
           generalError: "Có lỗi xảy ra. Vui lòng thử lại.",
+          usernameError: null,
+          passwordError: null,
         ),
       );
     }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/blocs/auth/register/register_event.dart';
 import 'package:smart_meal/blocs/auth/register/register_state.dart';
+import 'package:smart_meal/services/register_service.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(const RegisterState()) {
@@ -81,65 +82,74 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       final fieldErrors = <String, String>{};
 
       if (fullName.isEmpty) {
-        // fieldErrors['fullName'] = event.fullNameError!;
         fieldErrors['fullName'] = "Vui lòng nhập họ tên";
       }
       if (employeeId.isEmpty) {
-        // fieldErrors['employeeId'] = event.emptyEIdError!;
         fieldErrors['employeeId'] = "Vui lòng nhập mã nhân viên";
-      } else if (employeeId != '12345' && employeeId != '67890') {
-        fieldErrors['employeeId'] = event.invalidEIdError!;
       }
       if (username.isEmpty) {
-        fieldErrors['username'] = event.emptyUsernameError!;
-      } else if (username.toLowerCase() == 'admin') {
-        fieldErrors['username'] = event.invalidUsernameError!;
+        fieldErrors['username'] = "Vui lòng nhập tài khoản";
       }
       if (password.isEmpty) {
-        fieldErrors['password'] = event.emptyPasswordError!;
+        fieldErrors['password'] = "Vui lòng nhập mật khẩu";
       } else if (password.length < 6) {
-        fieldErrors['password'] = event.tooShortPasswordError!;
+        fieldErrors['password'] = "Mật khẩu trên 6 ký tự";
       }
 
-      emit(state.copyWith(fieldErrors: fieldErrors));
-      return;
+      if (fieldErrors.isNotEmpty) {
+        emit(
+          state.copyWith(
+            status: RegisterStatus.failure,
+            fieldErrors: fieldErrors,
+          ),
+        );
+        return;
+      }
     }
 
-    emit(state.copyWith(status: RegisterStatus.loading));
+    emit(
+      state.copyWith(
+        status: RegisterStatus.loading,
+        fullName: fullName,
+        employeeId: employeeId,
+        username: username,
+        password: '',
+      ),
+    );
 
     try {
-      // Simulate API call
-      // await Future.delayed(const Duration(seconds: 2));
+      final errorMessage = await RegisterService.registerAuth(
+        fullName,
+        employeeId,
+        username,
+        password,
+      );
 
-      // Simulate validation for unique username and employee ID
-      if (state.username.toLowerCase() == 'admin' ||
-          state.username.toLowerCase() == 'user') {
+      if (errorMessage == null) {
+        emit(
+          state.copyWith(
+            status: RegisterStatus.success,
+            fullName: fullName,
+            employeeId: employeeId,
+            username: username,
+            password: '',
+          ),
+        );
+      } else {
         emit(
           state.copyWith(
             status: RegisterStatus.failure,
-            errorMessage: 'Tên tài khoản đã được sử dụng',
+            errorMessage: errorMessage,
+            password: '', // Clear password for security
           ),
         );
-        return;
       }
-
-      if (state.employeeId != '12345' && state.employeeId != '67890') {
-        emit(
-          state.copyWith(
-            status: RegisterStatus.failure,
-            errorMessage: 'Mã nhân viên không hợp lệ',
-          ),
-        );
-        return;
-      }
-
-      // Success case
-      emit(state.copyWith(status: RegisterStatus.success));
     } catch (error) {
       emit(
         state.copyWith(
           status: RegisterStatus.failure,
           errorMessage: 'Đăng ký thất bại. Vui lòng thử lại.',
+          password: '',
         ),
       );
     }
