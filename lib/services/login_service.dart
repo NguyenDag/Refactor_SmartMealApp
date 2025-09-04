@@ -24,7 +24,6 @@ class LoginService {
       final json = jsonDecode(response.body);
 
       if (json['status'] == 1) {
-        final role = json['role'];
         final token = json['token'];
 
         TokenService.saveToken(token);

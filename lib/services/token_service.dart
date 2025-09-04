@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TokenService {
   static const _tokenKey = 'token';
   static const _loginTime = 'login_time';
-  static const _role = 'role';
 
   static Future<void> saveToken(String token,) async {
     final prefs = await SharedPreferences.getInstance();

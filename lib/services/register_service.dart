@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:smart_meal/services/token_service.dart';
 import '../constants/api_constant.dart';
-import '../models/user_info.dart';
 
 class RegisterService {
   static bool isFormatUsername(String username) =>
