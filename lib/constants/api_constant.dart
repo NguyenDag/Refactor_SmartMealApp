@@ -4,4 +4,8 @@ class ApiConstants {
   static String getUrl(String endPoint) {
     return url + endPoint;
   }
+
+  static String getImageUrl(String endPoint) {
+    return "http://30.30.30.85:7777$endPoint";
+  }
 }

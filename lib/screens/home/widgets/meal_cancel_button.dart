@@ -2,42 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/constants/app_colors.dart';
 import 'package:smart_meal/l10n/app_localizations.dart';
+import 'package:smart_meal/models/food_item_model.dart';
 
 import '../../../blocs/meal/home/meal_bloc.dart';
 import '../../../blocs/meal/home/meal_event.dart';
-import '../../../models/meal_model.dart';
 
 class MealCancelButton extends StatelessWidget {
-  final Meal meal;
+  final FoodItem foodItem;
 
-  const MealCancelButton({super.key, required this.meal});
+  const MealCancelButton({super.key, required this.foodItem});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
     final now = DateTime.now();
-    final serviceDate = meal.serviceDate;
+    final availableDate = foodItem.availableDate;
     final deadlineTime = DateTime(
-      serviceDate.year,
-      serviceDate.month,
-      serviceDate.day,
+      availableDate.year,
+      availableDate.month,
+      availableDate.day,
       10, // 10:00 AM
       0,
     );
 
-    bool canCancelOrder = meal.isOrdered && now.isBefore(deadlineTime);
+    bool canCancelOrder = foodItem.isOrdered && now.isBefore(deadlineTime);
 
     Color buttonColor =
-        meal.isOrdered ? AppColors.cancelButton : AppColors.disableButton;
+        foodItem.isOrdered ? AppColors.cancelButton : AppColors.disableButton;
 
     return SizedBox(
       height: 27,
       child: ElevatedButton(
         onPressed:
-            meal.isOrdered && canCancelOrder
+            foodItem.isOrdered && canCancelOrder
                 ? () {
-                  _showCancelConfirmation(context, meal);
+                  _showCancelConfirmation(context, foodItem);
                 }
                 : null,
         style: ElevatedButton.styleFrom(
@@ -57,14 +57,14 @@ class MealCancelButton extends StatelessWidget {
     );
   }
 
-  void _showCancelConfirmation(BuildContext context, Meal meal) {
+  void _showCancelConfirmation(BuildContext context, FoodItem foodItem) {
     showDialog(
       context: context,
       builder: (dialogContext) {
         final l10n = AppLocalizations.of(context);
         return AlertDialog(
           title: Text(l10n.confirmCancel),
-          content: Text(l10n.confirmMsgCancel(meal.name)),
+          content: Text(l10n.confirmMsgCancel(foodItem.nameFood)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
@@ -73,7 +73,7 @@ class MealCancelButton extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
-                context.read<MealBloc>().add(CancelMealOrder(meal.id));
+                context.read<MealBloc>().add(CancelMealOrder(foodItem.id));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.cancelButton,

@@ -21,7 +21,7 @@ class _WeeklyMealsViewState extends State<WeeklyMealsView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: AppColors.background,
         appBar: const CustomAppBar(),
         endDrawer: CustomAppDrawer(),
         body: BlocListener<MealBloc, MealState>(

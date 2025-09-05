@@ -10,7 +10,7 @@ abstract class MealEvent extends Equatable {
 class LoadWeeklyMeals extends MealEvent {}
 
 class OrderMeal extends MealEvent {
-  final String mealId;
+  final int mealId;
 
   const OrderMeal(this.mealId);
 
@@ -19,7 +19,7 @@ class OrderMeal extends MealEvent {
 }
 
 class CancelMealOrder extends MealEvent {
-  final String mealId;
+  final int mealId;
 
   const CancelMealOrder(this.mealId);
 

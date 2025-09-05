@@ -8,20 +8,15 @@ class RegisterService {
   static bool isFormatUsername(String username) =>
       username.trim().contains(' ');
 
+  static bool isFormatEmployeeId(String employeeId) =>
+      employeeId.trim().contains(' ');
+
   static Future<String?> registerAuth(
     String fullName,
     String employeeId,
     String username,
     String password,
   ) async {
-    if (fullName.trim().isEmpty ||
-        username.trim().isEmpty ||
-        password.isEmpty ||
-        employeeId.isEmpty) {
-      return 'Vui lòng điền đầy đủ thông tin!';
-    } else if (isFormatUsername(username)) {
-      return 'Tài khoản không được chứa dấu cách!';
-    }
     String endPoint = '/user/createNewUser';
     final uri = Uri.parse(ApiConstants.getUrl(endPoint));
 

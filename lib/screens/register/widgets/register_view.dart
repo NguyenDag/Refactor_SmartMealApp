@@ -65,10 +65,11 @@ class _RegisterViewState extends State<RegisterView> {
                 ).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
               }
             });
-          } else if (state.status == RegisterStatus.failure) {
+          } else if (state.status == RegisterStatus.failure &&
+              state.errorMessage != '') {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(l10n.failRegister),
+                content: Text(state.errorMessage!),
                 backgroundColor: AppColors.error,
               ),
             );
@@ -102,7 +103,10 @@ class _RegisterViewState extends State<RegisterView> {
                               context.read<RegisterBloc>().add(
                                 const BackToLoginPressed(),
                               );
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                AppRoutes.login,
+                                (route) => false,
+                              );
                             },
                             child: Container(
                               height: 100,

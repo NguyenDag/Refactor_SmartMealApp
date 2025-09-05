@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../../../models/meal_model.dart';
+import 'package:smart_meal/models/food_item_model.dart';
 
 abstract class MealState extends Equatable {
   const MealState();
@@ -14,7 +13,7 @@ class MealInitial extends MealState {}
 class MealLoading extends MealState {}
 
 class MealLoaded extends MealState {
-  final List<Meal> meals;
+  final List<FoodItem> meals;
 
   const MealLoaded(this.meals);
 
@@ -32,7 +31,7 @@ class MealError extends MealState {
 }
 
 class MealOrderSuccess extends MealState {
-  final List<Meal> meals;
+  final List<FoodItem> meals;
   final String message;
 
   const MealOrderSuccess(this.meals, this.message);
@@ -42,7 +41,7 @@ class MealOrderSuccess extends MealState {
 }
 
 class MealCancelSuccess extends MealState {
-  final List<Meal> meals;
+  final List<FoodItem> meals;
   final String message;
 
   const MealCancelSuccess(this.meals, this.message);

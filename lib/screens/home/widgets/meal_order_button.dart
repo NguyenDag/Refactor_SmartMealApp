@@ -2,38 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/constants/app_colors.dart';
 import 'package:smart_meal/l10n/app_localizations.dart';
-import 'package:smart_meal/models/meal_model.dart';
+import 'package:smart_meal/models/food_item_model.dart';
 
 import '../../../blocs/meal/home/meal_bloc.dart';
 import '../../../blocs/meal/home/meal_event.dart';
 
 class MealOrderButton extends StatelessWidget {
-  final Meal meal;
+  final FoodItem foodItem;
 
-  const MealOrderButton({super.key, required this.meal});
+  const MealOrderButton({super.key, required this.foodItem});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
     final now = DateTime.now();
-    final serviceDate = meal.serviceDate;
+    final availableDate = foodItem.availableDate;
     final deadlineTime = DateTime(
-      serviceDate.year,
-      serviceDate.month,
-      serviceDate.day,
+      availableDate.year,
+      availableDate.month,
+      availableDate.day,
       10,
       0,
       0,
     );
 
     bool isPastDeadline = now.isAfter(deadlineTime);
-    bool canOrder = !meal.isOrdered && !isPastDeadline;
+    bool canOrder = !foodItem.isOrdered && !isPastDeadline;
 
     Color buttonColor;
     String buttonText;
 
-    if (meal.isOrdered) {
+    if (foodItem.isOrdered) {
       buttonColor = AppColors.disableButton;
       buttonText = l10n.ordered;
     } else if (isPastDeadline) {
@@ -50,7 +50,7 @@ class MealOrderButton extends StatelessWidget {
         onPressed:
             canOrder
                 ? () {
-                  _showOrderConfirmation(context, meal);
+                  _showOrderConfirmation(context, foodItem);
                 }
                 : null,
         style: ElevatedButton.styleFrom(
@@ -70,14 +70,14 @@ class MealOrderButton extends StatelessWidget {
     );
   }
 
-  void _showOrderConfirmation(BuildContext context, Meal meal) {
+  void _showOrderConfirmation(BuildContext context, FoodItem meal) {
     showDialog(
       context: context,
       builder: (dialogContext) {
         final l10n = AppLocalizations.of(context);
         return AlertDialog(
           title: Text(l10n.confirmOrder),
-          content: Text(l10n.confirmMsgOrder(meal.name)),
+          content: Text(l10n.confirmMsgOrder(meal.nameFood)),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_meal/models/food_item_model.dart';
 
-import '../../../models/meal_model.dart';
+import '../../../services/weekly_meals_service.dart';
 import 'meal_event.dart';
 import 'meal_state.dart';
 
@@ -11,7 +12,7 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     on<CancelMealOrder>(_onCancelMealOrder);
   }
 
-  List<Meal> _meals = [];
+  List<FoodItem> _meals = [];
 
   void _onLoadWeeklyMeals(
     LoadWeeklyMeals event,
@@ -20,62 +21,7 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     // emit(MealLoading());
 
     try {
-      // Simulate API call
-      // await Future.delayed(Duration(milliseconds: 500));
-
-      final now = DateTime.now();
-      _meals = [
-        Meal(
-          id: '1',
-          name: 'Cơm gà',
-          imageUrl: 'assets/images/com_ga.jpg',
-          price: 25000,
-          serviceDate: DateTime(now.year, now.month, now.day - 1),
-        ),
-        Meal(
-          id: '2',
-          name: 'Phở gà',
-          imageUrl: 'assets/images/pho_ga.jpg',
-          price: 25000,
-          serviceDate: DateTime(now.year, now.month, now.day),
-        ),
-        Meal(
-          id: '3',
-          name: 'Mỳ cay',
-          imageUrl: 'assets/images/my_cay.jpg',
-          price: 25000,
-          serviceDate: DateTime(now.year, now.month, now.day + 1),
-          isOrdered: true,
-        ),
-        Meal(
-          id: '4',
-          name: 'Cơm rang',
-          imageUrl: 'assets/images/com_rang.jpg',
-          price: 25000,
-          serviceDate: DateTime(now.year, now.month, now.day + 2),
-        ),
-        Meal(
-          id: '5',
-          name: 'Cơm thố',
-          imageUrl: 'assets/images/com_tron.jpg',
-          price: 35000,
-          serviceDate: DateTime(now.year, now.month, now.day + 2),
-        ),
-        Meal(
-          id: '6',
-          name: 'Cơm tấm',
-          imageUrl: 'assets/images/com_rang.jpg',
-          price: 30000,
-          serviceDate: DateTime(now.year, now.month, now.day + 3),
-        ),
-        Meal(
-          id: '7',
-          name: 'Cơm trộn',
-          imageUrl: 'assets/images/my_cay.jpg',
-          price: 25000,
-          serviceDate: DateTime(now.year, now.month, now.day + 4),
-        ),
-      ];
+      _meals = await WeaklyMealsService.fetchWeeklyMeals();
 
       emit(MealLoaded(_meals));
     } catch (e) {
@@ -87,10 +33,7 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     try {
       final mealIndex = _meals.indexWhere((meal) => meal.id == event.mealId);
       if (mealIndex != -1) {
-        _meals[mealIndex] = _meals[mealIndex].copyWith(
-          isOrdered: true,
-          orderedAt: DateTime.now(),
-        );
+        _meals[mealIndex] = _meals[mealIndex].copyWith(isOrdered: true);
         emit(MealOrderSuccess(_meals, 'Đặt món ăn thành công'));
       } else {
         emit(MealError('Không tìm thấy món ăn'));
@@ -104,10 +47,7 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     try {
       final mealIndex = _meals.indexWhere((meal) => meal.id == event.mealId);
       if (mealIndex != -1) {
-        _meals[mealIndex] = _meals[mealIndex].copyWith(
-          isOrdered: false,
-          orderedAt: null,
-        );
+        _meals[mealIndex] = _meals[mealIndex].copyWith(isOrdered: false);
         emit(MealCancelSuccess(_meals, 'Hủy đặt món ăn thành công'));
       }
     } catch (e) {

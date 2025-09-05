@@ -78,17 +78,21 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     final username = event.username.trim();
     final password = event.password.trim();
 
-    if (!state.isFormValid) {
-      final fieldErrors = <String, String>{};
+    final fieldErrors = <String, String>{};
 
+    if (!state.isFormValid) {
       if (fullName.isEmpty) {
         fieldErrors['fullName'] = "Vui lòng nhập họ tên";
       }
       if (employeeId.isEmpty) {
         fieldErrors['employeeId'] = "Vui lòng nhập mã nhân viên";
+      } else if (RegisterService.isFormatEmployeeId(employeeId)) {
+        fieldErrors['employeeId'] = "Mã nhân viên không được chứa dấu cách!";
       }
       if (username.isEmpty) {
         fieldErrors['username'] = "Vui lòng nhập tài khoản";
+      } else if (RegisterService.isFormatUsername(username)) {
+        fieldErrors['username'] = "Tài khoản không được chứa dấu cách!";
       }
       if (password.isEmpty) {
         fieldErrors['password'] = "Vui lòng nhập mật khẩu";
@@ -101,6 +105,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           state.copyWith(
             status: RegisterStatus.failure,
             fieldErrors: fieldErrors,
+            errorMessage: '',
           ),
         );
         return;
@@ -140,6 +145,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           state.copyWith(
             status: RegisterStatus.failure,
             errorMessage: errorMessage,
+            fieldErrors: const <String, String>{},
             password: '', // Clear password for security
           ),
         );
