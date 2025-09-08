@@ -4,8 +4,6 @@ import 'package:smart_meal/constants/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
 
 class WeeklyMealsHeader extends StatelessWidget {
-  final String userName = 'Lê Văn Thành';
-
   const WeeklyMealsHeader({super.key});
 
   @override
@@ -18,7 +16,7 @@ class WeeklyMealsHeader extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(16),
           child: Text(
-            l10n.welcomeUser(userName),
+            l10n.welcomeUser("Thanh"),
             style: TextStyle(fontSize: 13, color: AppColors.textPrimary),
           ),
         ),

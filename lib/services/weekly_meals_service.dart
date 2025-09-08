@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_meal/models/food_item_model.dart';
+import 'package:smart_meal/models/user_info.dart';
 import 'package:smart_meal/services/token_service.dart';
 
 import '../constants/api_constant.dart';
@@ -45,5 +46,42 @@ class WeaklyMealsService {
       }
     }
     return [];
+  }
+
+  static Future<UserInfo?> fetchUserInfo() async {
+    final token = await TokenService.getToken();
+    if (token == null) {
+      return null;
+    }
+
+    final endPoint = '/user/getUserInfo';
+    final url = Uri.parse(ApiConstants.getUrl(endPoint));
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        final status = json['status'];
+
+        if (status == 1) {
+          final rawData = json['data'];
+
+          UserInfo userInfo = UserInfo.fromJson(rawData);
+          return userInfo;
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error fetching user info: $e');
+      }
+    }
+    return null;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/models/food_item_model.dart';
+import 'package:smart_meal/models/user_info.dart';
 
 import '../../../services/weekly_meals_service.dart';
 import 'meal_event.dart';
@@ -12,18 +13,24 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     on<CancelMealOrder>(_onCancelMealOrder);
   }
 
+  UserInfo? _userInfo;
   List<FoodItem> _meals = [];
 
   void _onLoadWeeklyMeals(
     LoadWeeklyMeals event,
     Emitter<MealState> emit,
   ) async {
-    // emit(MealLoading());
+    emit(MealLoading());
 
     try {
+      _userInfo = await WeaklyMealsService.fetchUserInfo();
       _meals = await WeaklyMealsService.fetchWeeklyMeals();
 
-      emit(MealLoaded(_meals));
+      if (_userInfo != null) {
+        emit(MealLoaded(_userInfo!, _meals));
+      } else {
+        emit(MealError('Không thể lấy thông tin người dùng'));
+      }
     } catch (e) {
       emit(MealError('Không thể tải danh sách món ăn'));
     }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:smart_meal/models/food_item_model.dart';
+import 'package:smart_meal/models/user_info.dart';
 
 abstract class MealState extends Equatable {
   const MealState();
@@ -13,9 +14,10 @@ class MealInitial extends MealState {}
 class MealLoading extends MealState {}
 
 class MealLoaded extends MealState {
+  final UserInfo userInfo;
   final List<FoodItem> meals;
 
-  const MealLoaded(this.meals);
+  const MealLoaded(this.userInfo, this.meals);
 
   @override
   List<Object> get props => [meals];
