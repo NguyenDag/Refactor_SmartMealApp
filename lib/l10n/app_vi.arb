@@ -52,5 +52,9 @@
   "confirmCancel": "Xác nhận hủy món",
   "confirmOrder": "Xác nhận đặt món",
   "confirmMsgCancel": "Bạn có chắc chắn muốn huỷ món {mealName} không?",
-  "confirmMsgOrder": "Bạn có chắc chắn muốn đặt món {mealName} không?"
+  "confirmMsgOrder": "Bạn có chắc chắn muốn đặt món {mealName} không?",
+  "logout": "Đăng xuất",
+  "logoutConfirm": "Xác nhận đăng xuất",
+  "logoutMsg": "Bạn có chắc chắn muốn đăng xuất không?",
+  "unconfirm": "Hủy bỏ"
 }

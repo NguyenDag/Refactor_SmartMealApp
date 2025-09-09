@@ -42,7 +42,7 @@ class StatisticHeader extends StatelessWidget {
   Widget _buildTitle(AppLocalizations l10n) {
     return Row(
       children: [
-        const Icon(Icons.assessment, color: AppColors.iconColor),
+        const Icon(Icons.assessment, color: AppColors.blueIconColor),
         const SizedBox(width: 8),
         Text(
           l10n.mealStatistics,

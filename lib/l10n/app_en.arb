@@ -208,5 +208,9 @@
   "confirmCancel": "Confirm Cancel Order",
   "confirmOrder": "Confirm Order",
   "confirmMsgCancel": "Are you sure you want to cancel the meal {mealName}?",
-  "confirmMsgOrder": "Are you sure you want to order the meal {mealName}?"
+  "confirmMsgOrder": "Are you sure you want to order the meal {mealName}?",
+  "logout": "Logout",
+  "logoutConfirm": "Confirm Logout",
+  "logoutMsg": "Are you sure you want to logout?",
+  "unconfirm": "Cancel"
 }

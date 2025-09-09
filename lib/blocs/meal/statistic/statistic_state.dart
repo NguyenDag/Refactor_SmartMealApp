@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../models/statistic_model.dart';
+import '../../../models/meal_statistics_model.dart';
 
 abstract class StatisticState extends Equatable {
   const StatisticState();
@@ -14,7 +14,7 @@ class StatisticInitial extends StatisticState {}
 class StatisticLoading extends StatisticState {}
 
 class StatisticLoaded extends StatisticState {
-  final List<Statistic> statistics;
+  final List<MealStatistics> statistics;
   final double totalAmount;
   final int selectedMonth;
   final int selectedYear;
@@ -38,13 +38,3 @@ class StatisticError extends StatisticState {
   @override
   List<Object> get props => [message];
 }
-
-/*
-class StatisticSearchSuccess extends StatisticState {
-  final List<Statistic> statistics;
-
-  const StatisticSearchSuccess(this.statistics);
-
-  @override
-  List<Object> get props => [statistics];
-}*/

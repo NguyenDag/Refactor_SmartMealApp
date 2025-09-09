@@ -181,4 +181,16 @@ class AppLocalizationsVi extends AppLocalizations {
   String confirmMsgOrder(Object mealName) {
     return 'Bạn có chắc chắn muốn đặt món $mealName không?';
   }
+
+  @override
+  String get logout => 'Đăng xuất';
+
+  @override
+  String get logoutConfirm => 'Xác nhận đăng xuất';
+
+  @override
+  String get logoutMsg => 'Bạn có chắc chắn muốn đăng xuất không?';
+
+  @override
+  String get unconfirm => 'Hủy bỏ';
 }

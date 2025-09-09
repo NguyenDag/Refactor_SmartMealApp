@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/app_colors.dart';
+import '../../constants/app_icons.dart';
+import '../../constants/app_images.dart';
 import '../../l10n/app_localizations.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.appBarPrimary,
       elevation: 0,
       leading: IconButton(
-        icon: Icon(Icons.location_on, color: AppColors.iconColor),
+        icon: Image.asset(AppImages.menuIcon, width: 32, height: 32),
         onPressed: () {},
       ),
       title: Text(
@@ -28,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Builder(
           builder:
               (context) => IconButton(
-                icon: const Icon(Icons.menu, color: AppColors.whiteIconColor),
+                icon: AppIcons.menu,
                 onPressed: () {
                   Scaffold.of(context).openEndDrawer();
                 },

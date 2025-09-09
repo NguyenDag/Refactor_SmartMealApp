@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:smart_meal/models/ordered_food_item_model.dart';
 
 import '../../../constants/app_colors.dart';
-import '../../../models/order_history_model.dart';
 import 'package:smart_meal/screens/order_history/widgets/cell_table.dart';
 
 class TableRow extends StatelessWidget {
-  final OrderHistory order;
+  final OrderedFoodItem order;
   final bool isLastItem;
 
   const TableRow({super.key, required this.order, required this.isLastItem});
@@ -29,8 +30,8 @@ class TableRow extends StatelessWidget {
       child: Row(
         children: [
           CellTable(text: order.id.toString(), flex: 1),
-          CellTable(text: order.dishName, flex: 2),
-          CellTable(text: order.supplyDate, flex: 2),
+          CellTable(text: order.nameFood, flex: 2),
+          CellTable(text: DateFormat('dd/MM/yyyy').format(order.orderDate), flex: 2),
           CellTable(text: order.status, flex: 2),
         ],
       ),

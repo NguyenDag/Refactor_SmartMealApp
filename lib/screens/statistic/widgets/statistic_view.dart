@@ -17,8 +17,8 @@ class StatisticView extends StatefulWidget {
 }
 
 class _StatisticViewState extends State<StatisticView> {
-  int selectedMonth = 8;
-  int selectedYear = 2025;
+  int selectedMonth = DateTime.now().month;
+  int selectedYear = DateTime.now().year;
 
   void _onSearchPressed() {
     context.read<StatisticBloc>().add(

@@ -8,7 +8,7 @@ import 'package:smart_meal/services/token_service.dart';
 
 import '../constants/api_constant.dart';
 
-class WeaklyMealsService {
+class WeeklyMealsService {
   static Future<List<FoodItem>> fetchWeeklyMeals() async {
     final token = await TokenService.getToken();
     if (token == null) {
@@ -83,5 +83,76 @@ class WeaklyMealsService {
       }
     }
     return null;
+  }
+
+  static Future<Map<String, dynamic>> createOrder(int id) async {
+    final token = await TokenService.getToken();
+
+    if (token == null) {
+      return {'status': 0, 'message': 'Chưa đăng nhập!'};
+    }
+
+    final endPoint = '/orders/createOrder/$id';
+    final uri = Uri.parse(ApiConstants.getUrl(endPoint));
+
+    try {
+      final response = await http.post(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({'quantity': 1, 'statusOrder': 'ordered'}),
+      );
+      final json = jsonDecode(response.body);
+
+      if (json['status'] == 1) {
+        return {
+          'status': 1,
+          'orderId': json['orderId'],
+          'message': json['message'],
+        };
+      } else {
+        return {
+          'status': 0,
+          'message': json['message'] ?? 'Tạo đơn hàng thất bại!',
+        };
+      }
+    } catch (e) {
+      return {'status': 0, 'message': 'Lỗi kết nối tới máy chủ!'};
+    }
+  }
+
+  static Future<Map<String, dynamic>> cancelOrder(int id) async {
+    final token = await TokenService.getToken();
+
+    if (token == null) {
+      return {'status': 0, 'message': 'Chưa đăng nhập!'};
+    }
+
+    final endPoint = '/orders/cancelOrder/$id';
+    final uri = Uri.parse(ApiConstants.getUrl(endPoint));
+
+    try {
+      final response = await http.delete(
+        uri,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+      final json = jsonDecode(response.body);
+
+      if (json['status'] == 1) {
+        return {'status': 1, 'message': json['message']};
+      } else {
+        return {
+          'status': 0,
+          'message': json['message'] ?? 'Tạo đơn hàng thất bại!',
+        };
+      }
+    } catch (e) {
+      return {'status': 0, 'message': 'Lỗi kết nối tới máy chủ!'};
+    }
   }
 }

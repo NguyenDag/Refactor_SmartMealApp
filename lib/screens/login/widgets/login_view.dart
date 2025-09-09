@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/auth/login/login_bloc.dart';
 import '../../../blocs/auth/login/login_event.dart';
 import '../../../blocs/auth/login/login_state.dart';
+import '../../../constants/app_images.dart';
 import '../../../constants/app_routes.dart';
 import 'login_card.dart';
 
@@ -45,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/image_login.jpg'),
+            image: AssetImage(AppImages.loginBackground),
             fit: BoxFit.cover,
           ),
         ),

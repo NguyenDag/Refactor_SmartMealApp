@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:smart_meal/screens/statistic/widgets/table_header.dart';
 import 'package:smart_meal/screens/statistic/widgets/table_row_item.dart';
 
-import '../../../models/statistic_model.dart';
+import '../../../models/meal_statistics_model.dart';
 
 class StatisticTable extends StatelessWidget {
-  final List<Statistic> statistics;
+  final List<MealStatistics> statistics;
 
   const StatisticTable({super.key, required this.statistics});
 

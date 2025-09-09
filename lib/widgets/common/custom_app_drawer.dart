@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:smart_meal/constants/app_colors.dart';
+import 'package:smart_meal/constants/app_images.dart';
 import 'package:smart_meal/screens/statistic/statistic_screen.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../screens/home/home_screen.dart';
 import '../../screens/login/login_screen.dart';
 import '../../screens/order_history/order_history_screen.dart';
@@ -10,13 +13,14 @@ class CustomAppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Drawer(
       child: Container(
         color: Colors.white,
         child: Column(
           children: [
             // Header của drawer
-            _buildDrawerHeader(),
+            _buildDrawerHeader(l10n.appTitle),
 
             // Các mục menu
             Expanded(
@@ -24,9 +28,9 @@ class CustomAppDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 children: [
                   _buildMenuItem(
-                    icon: Icons.restaurant_menu,
-                    iconColor: Colors.orange,
-                    title: 'Món ăn trong tuần',
+                    iconImage: AppImages.mealIcon,
+                    iconColor: AppColors.iconColor,
+                    title: l10n.weeklyMeals,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -38,9 +42,9 @@ class CustomAppDrawer extends StatelessWidget {
                   ),
 
                   _buildMenuItem(
-                    icon: Icons.history,
-                    iconColor: Colors.blue,
-                    title: 'Lịch sử đặt món',
+                    iconImage: AppImages.orderHistoryIcon,
+                    iconColor: AppColors.blueIconColor,
+                    title: l10n.orderHistory,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -52,9 +56,9 @@ class CustomAppDrawer extends StatelessWidget {
                   ),
 
                   _buildMenuItem(
-                    icon: Icons.assessment,
-                    iconColor: Colors.green,
-                    title: 'Thống kê suất ăn',
+                    iconImage: AppImages.mealStatisticIcon,
+                    iconColor: AppColors.blueIconColor,
+                    title: l10n.mealStatistics,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -66,9 +70,9 @@ class CustomAppDrawer extends StatelessWidget {
                   ),
 
                   _buildMenuItem(
-                    icon: Icons.logout,
-                    iconColor: Colors.blue,
-                    title: 'Đăng xuất',
+                    iconImage: AppImages.logoutIcon,
+                    iconColor: AppColors.blueIconColor,
+                    title: l10n.logout,
                     onTap: () {
                       Navigator.pop(context);
                       _showLogoutConfirmDialog(context);
@@ -83,23 +87,23 @@ class CustomAppDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawerHeader() {
+  Widget _buildDrawerHeader(String appTitle) {
     return SizedBox(
       width: double.infinity,
       height: 100,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(8),
         child: Row(
           children: [
             IconButton(
-              icon: Icon(Icons.location_on, color: Colors.orange),
+              icon: Image.asset(AppImages.menuIcon, width: 32, height: 32),
               onPressed: () {},
             ),
             const SizedBox(height: 8),
             Text(
-              'ĐẶT CƠM',
+              appTitle,
               style: const TextStyle(
-                color: Colors.black,
+                color: AppColors.textPrimary,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -111,13 +115,13 @@ class CustomAppDrawer extends StatelessWidget {
   }
 
   Widget _buildMenuItem({
-    required IconData icon,
+    required String iconImage,
     required Color iconColor,
     required String title,
     required VoidCallback onTap,
   }) {
     return ListTile(
-      leading: Icon(icon, color: iconColor, size: 24),
+      leading: Image.asset(iconImage, width: 20, height: 20),
       title: Text(
         title,
         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
@@ -130,20 +134,21 @@ class CustomAppDrawer extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final l10n = AppLocalizations.of(context);
         return AlertDialog(
-          title: const Text('Xác nhận đăng xuất'),
-          content: const Text('Bạn có chắc chắn muốn đăng xuất không?'),
+          title: Text(l10n.logoutConfirm),
+          content: Text(l10n.logoutMsg),
           actions: [
             TextButton(
-              child: const Text('Hủy'),
+              child: Text(l10n.unconfirm),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text(
-                'Đăng xuất',
-                style: TextStyle(color: Colors.red),
+              child: Text(
+                l10n.logout,
+                style: TextStyle(color: AppColors.warning),
               ),
               onPressed: () {
                 Navigator.pushReplacement(

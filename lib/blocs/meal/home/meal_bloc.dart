@@ -23,8 +23,8 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     emit(MealLoading());
 
     try {
-      _userInfo = await WeaklyMealsService.fetchUserInfo();
-      _meals = await WeaklyMealsService.fetchWeeklyMeals();
+      _userInfo = await WeeklyMealsService.fetchUserInfo();
+      _meals = await WeeklyMealsService.fetchWeeklyMeals();
 
       if (_userInfo != null) {
         emit(MealLoaded(_userInfo!, _meals));
@@ -36,29 +36,36 @@ class MealBloc extends Bloc<MealEvent, MealState> {
     }
   }
 
-  void _onOrderMeal(OrderMeal event, Emitter<MealState> emit) {
+  Future<void> _onOrderMeal(OrderMeal event, Emitter<MealState> emit) async {
+    final result = await WeeklyMealsService.createOrder(event.mealId);
+
     try {
-      final mealIndex = _meals.indexWhere((meal) => meal.id == event.mealId);
-      if (mealIndex != -1) {
-        _meals[mealIndex] = _meals[mealIndex].copyWith(isOrdered: true);
-        emit(MealOrderSuccess(_meals, 'Đặt món ăn thành công'));
+      if (result['status'] == 1) {
+        _meals = await WeeklyMealsService.fetchWeeklyMeals();
+        emit(MealOrderSuccess(_meals, result['message']));
       } else {
-        emit(MealError('Không tìm thấy món ăn'));
+        emit(MealError(result['message']));
       }
     } catch (e) {
-      emit(MealError('Không thể đặt món ăn'));
+      emit(MealError(result['message']));
     }
   }
 
-  void _onCancelMealOrder(CancelMealOrder event, Emitter<MealState> emit) {
+  Future<void> _onCancelMealOrder(
+    CancelMealOrder event,
+    Emitter<MealState> emit,
+  ) async {
+    final result = await WeeklyMealsService.cancelOrder(event.mealId);
+
     try {
-      final mealIndex = _meals.indexWhere((meal) => meal.id == event.mealId);
-      if (mealIndex != -1) {
-        _meals[mealIndex] = _meals[mealIndex].copyWith(isOrdered: false);
-        emit(MealCancelSuccess(_meals, 'Hủy đặt món ăn thành công'));
+      if (result['status'] == 1) {
+        _meals = await WeeklyMealsService.fetchWeeklyMeals();
+        emit(MealCancelSuccess(_meals, result['message']));
+      } else {
+        emit(MealError(result['message']));
       }
     } catch (e) {
-      emit(MealError('Không thể hủy món'));
+      emit(MealError(result['message']));
     }
   }
 }

@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_colors.dart';
-import '../../../models/statistic_model.dart';
+import '../../../models/meal_statistics_model.dart';
 import '../../../utils/number_formatter.dart';
 
 class TableRowItem extends StatelessWidget {
-  final Statistic statistic;
+  final MealStatistics statistic;
   final bool isEvenRow;
 
   const TableRowItem({
@@ -30,10 +30,10 @@ class TableRowItem extends StatelessWidget {
       child: Row(
         children: [
           _buildCell(statistic.id.toString(), flex: 5),
-          _buildCell(statistic.dishName, flex: 10),
-          _buildCell(NumberFormatter.formatVND(statistic.amount), flex: 11),
+          _buildCell(statistic.nameFood, flex: 10),
+          _buildCell(NumberFormatter.formatVND(statistic.price), flex: 11),
           _buildCell(
-            '${statistic.supplyDate.day}/${statistic.supplyDate.month}/${statistic.supplyDate.year}',
+            '${statistic.orderDate.day}/${statistic.orderDate.month}/${statistic.orderDate.year}',
             flex: 10,
           ),
         ],

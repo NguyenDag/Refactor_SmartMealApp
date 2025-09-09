@@ -7,6 +7,7 @@ import '../../../blocs/auth/register/register_bloc.dart';
 import '../../../blocs/auth/register/register_event.dart';
 import '../../../blocs/auth/register/register_state.dart';
 import '../../../constants/app_colors.dart';
+import '../../../constants/app_images.dart';
 import '../../../l10n/app_localizations.dart';
 
 class RegisterView extends StatefulWidget {
@@ -83,7 +84,7 @@ class _RegisterViewState extends State<RegisterView> {
               height: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/image_register.jpg'),
+                  image: AssetImage(AppImages.registerBackground),
                   fit: BoxFit.cover,
                 ),
               ),

@@ -75,8 +75,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weeklyMeals => 'Meals for this week';
 
   @override
-  String get noteOrder =>
-      'Note: Please place your meal order no later than 10:00 AM';
+  String get noteOrder => 'Note: Please place your meal order no later than 10:00 AM';
 
   @override
   String get no1 => 'No.';
@@ -182,4 +181,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String confirmMsgOrder(Object mealName) {
     return 'Are you sure you want to order the meal $mealName?';
   }
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get logoutConfirm => 'Confirm Logout';
+
+  @override
+  String get logoutMsg => 'Are you sure you want to logout?';
+
+  @override
+  String get unconfirm => 'Cancel';
 }

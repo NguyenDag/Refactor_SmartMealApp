@@ -44,6 +44,7 @@ flutter:
   assets:
     # Load toàn bộ thư mục images
     - assets/images/
+    - assets/icons/
 
     # Hoặc load từng file cụ thể
     #- assets/images/register_bg.jpg
