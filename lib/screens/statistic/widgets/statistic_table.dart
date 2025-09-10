@@ -14,7 +14,6 @@ class StatisticTable extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
@@ -40,7 +39,7 @@ class StatisticTable extends StatelessWidget {
             final statistic = statistics[index];
             final isEvenRow = index % 2 == 0;
 
-            return TableRowItem(statistic: statistic, isEvenRow: isEvenRow);
+            return TableRowItem(statistic: statistic, isEvenRow: isEvenRow, index: index + 1,);
           },
         ),
       ],

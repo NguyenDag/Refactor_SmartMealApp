@@ -45,7 +45,7 @@ class OrderHistoryTableContent extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
-                            order.id.toString(),
+                              (index + 1).toString(),
                             style: const TextStyle(
                               fontSize: 12,
                               color: AppColors.textPrimary,

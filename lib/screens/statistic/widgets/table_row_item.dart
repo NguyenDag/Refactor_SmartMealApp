@@ -7,12 +7,14 @@ import '../../../utils/number_formatter.dart';
 
 class TableRowItem extends StatelessWidget {
   final MealStatistics statistic;
+  final int index;
   final bool isEvenRow;
 
   const TableRowItem({
     super.key,
     required this.statistic,
     required this.isEvenRow,
+    required this.index,
   });
 
   @override
@@ -29,7 +31,7 @@ class TableRowItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _buildCell(statistic.id.toString(), flex: 5),
+          _buildCell(index.toString(), flex: 5),
           _buildCell(statistic.nameFood, flex: 10),
           _buildCell(NumberFormatter.formatVND(statistic.price), flex: 11),
           _buildCell(

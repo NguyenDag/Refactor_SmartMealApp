@@ -75,7 +75,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weeklyMeals => 'Meals for this week';
 
   @override
-  String get noteOrder => 'Note: Please place your meal order no later than 10:00 AM';
+  String get noteOrder =>
+      'Note: Please place your meal order no later than 10:00 AM';
 
   @override
   String get no1 => 'No.';
