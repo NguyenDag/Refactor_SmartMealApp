@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_meal/screens/statistic/widgets/year_dropdown.dart';
 import '../../../constants/app_colors.dart';
+import '../../../constants/app_images.dart';
 import '../../../l10n/app_localizations.dart';
 import 'month_dropdown.dart';
 
@@ -42,7 +43,7 @@ class StatisticHeader extends StatelessWidget {
   Widget _buildTitle(AppLocalizations l10n) {
     return Row(
       children: [
-        const Icon(Icons.assessment, color: AppColors.blueIconColor),
+        Image.asset(AppImages.mealStatisticIcon, width: 24, height: 24),
         const SizedBox(width: 8),
         Text(
           l10n.mealStatistics,

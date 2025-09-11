@@ -60,11 +60,7 @@ class WeeklyMealsHeader extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Image.asset(
-                AppImages.menuIcon,
-                width: 24,
-                height: 24,
-              ),
+              Image.asset(AppImages.mealIcon, width: 24, height: 24),
               SizedBox(width: 8),
               Text(
                 l10n.weeklyMeals,

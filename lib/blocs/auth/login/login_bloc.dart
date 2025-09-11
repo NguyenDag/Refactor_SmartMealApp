@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../services/login_service.dart';
+import '../../../data/remote/login_service.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 

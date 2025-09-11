@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_meal/constants/app_images.dart';
 
 import '../../../constants/app_colors.dart';
 import '../../../l10n/app_localizations.dart';
@@ -18,11 +19,7 @@ class OrderHistoryHeader extends StatelessWidget {
             width: 30,
             height: 30,
             decoration: BoxDecoration(color: AppColors.secondaryBackground),
-            child: const Icon(
-              Icons.history,
-              color: AppColors.blueIconColor,
-              size: 24,
-            ),
+            child: Image.asset(AppImages.orderHistoryIcon, width: 24, height: 24),
           ),
           const SizedBox(width: 12),
           Text(

@@ -20,7 +20,7 @@ class CustomAppDrawer extends StatelessWidget {
         child: Column(
           children: [
             // Header của drawer
-            _buildDrawerHeader(l10n.appTitle),
+            _buildDrawerHeader(context, l10n.appTitle),
 
             // Các mục menu
             Expanded(
@@ -87,7 +87,7 @@ class CustomAppDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildDrawerHeader(String appTitle) {
+  Widget _buildDrawerHeader(BuildContext context, String appTitle) {
     return SizedBox(
       width: double.infinity,
       height: 100,
@@ -107,6 +107,13 @@ class CustomAppDrawer extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const Spacer(), // đẩy nút X ra cuối cùng
+            IconButton(
+              icon: const Icon(Icons.close, color: AppColors.textPrimary),
+              onPressed: () {
+                Navigator.of(context).pop(); // thoát Drawer
+              },
             ),
           ],
         ),

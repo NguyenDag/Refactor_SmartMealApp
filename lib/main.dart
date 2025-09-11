@@ -22,12 +22,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    Locale locale = const Locale('vi');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: AppStrings.appTitle,
-      locale: locale,
       theme: ThemeData(
         // colorScheme: ColorScheme.fromSeed(seedColor: AppColors.seedColor),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
@@ -39,6 +36,15 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        if (deviceLocale != null &&
+            supportedLocales
+                .map((e) => e.languageCode)
+                .contains(deviceLocale.languageCode)) {
+          return Locale(deviceLocale.languageCode);
+        }
+        return const Locale('vi');
+      },
       supportedLocales: const [
         Locale('en'), // English
         Locale('vi'), // Vietnamese

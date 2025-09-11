@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/blocs/meal/statistic/statistic_event.dart';
 import 'package:smart_meal/blocs/meal/statistic/statistic_state.dart';
 
-import '../../../services/meal_statistics_service.dart';
+import '../../../data/remote/meal_statistics_service.dart';
 
 class StatisticBloc extends Bloc<StatisticEvent, StatisticState> {
   StatisticBloc() : super(StatisticInitial()) {

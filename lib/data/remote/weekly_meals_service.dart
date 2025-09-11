@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_meal/models/food_item_model.dart';
 import 'package:smart_meal/models/user_info.dart';
-import 'package:smart_meal/services/token_service.dart';
 
-import '../constants/api_constant.dart';
+import '../../constants/api_constant.dart';
+import '../local/token_service.dart';
 
 class WeeklyMealsService {
   static Future<List<FoodItem>> fetchWeeklyMeals() async {

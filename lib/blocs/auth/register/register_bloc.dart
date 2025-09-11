@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/blocs/auth/register/register_event.dart';
 import 'package:smart_meal/blocs/auth/register/register_state.dart';
-import 'package:smart_meal/services/register_service.dart';
+
+import '../../../data/remote/register_service.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(const RegisterState()) {

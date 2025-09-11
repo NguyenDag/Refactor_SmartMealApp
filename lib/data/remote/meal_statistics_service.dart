@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_meal/models/meal_statistics_model.dart';
-import 'package:smart_meal/services/token_service.dart';
 
-import '../constants/api_constant.dart';
+import '../../constants/api_constant.dart';
+import '../local/token_service.dart';
 
 class MealStatisticsService {
   static Future<List<MealStatistics>> getOrderHistoryByMonth({

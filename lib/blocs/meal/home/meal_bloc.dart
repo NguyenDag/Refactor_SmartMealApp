@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/models/food_item_model.dart';
 import 'package:smart_meal/models/user_info.dart';
 
-import '../../../services/weekly_meals_service.dart';
+import '../../../data/remote/weekly_meals_service.dart';
 import 'meal_event.dart';
 import 'meal_state.dart';
 
