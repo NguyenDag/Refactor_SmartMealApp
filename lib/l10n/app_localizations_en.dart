@@ -75,8 +75,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get weeklyMeals => 'Meals for this week';
 
   @override
-  String get noteOrder =>
-      'Note: Please place your meal order no later than 10:00 AM';
+  String get noteOrder => 'Note: Please place your meal order no later than 10:00 AM';
 
   @override
   String get no1 => 'No.';
@@ -194,4 +193,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unconfirm => 'Cancel';
+
+  @override
+  String get usernameRequired => 'Username cannot be empty';
+
+  @override
+  String get passwordRequired => 'Password cannot be empty';
+
+  @override
+  String get tryAgain => 'Try Again';
 }

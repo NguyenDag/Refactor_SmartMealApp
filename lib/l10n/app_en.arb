@@ -212,5 +212,17 @@
   "logout": "Logout",
   "logoutConfirm": "Confirm Logout",
   "logoutMsg": "Are you sure you want to logout?",
-  "unconfirm": "Cancel"
+  "unconfirm": "Cancel",
+
+  "usernameRequired": "Username cannot be empty",
+  "@usernameRequired": {
+    "description": "Validation message when username field is empty"
+  },
+
+  "passwordRequired": "Password cannot be empty",
+  "@passwordRequired": {
+    "description": "Validation message when password field is empty"
+  },
+
+  "tryAgain": "Try Again"
 }

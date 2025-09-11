@@ -56,5 +56,9 @@
   "logout": "Đăng xuất",
   "logoutConfirm": "Xác nhận đăng xuất",
   "logoutMsg": "Bạn có chắc chắn muốn đăng xuất không?",
-  "unconfirm": "Hủy bỏ"
+  "unconfirm": "Hủy bỏ",
+
+  "usernameRequired": "Tên tài khoản không được để trống",
+  "passwordRequired": "Mật khẩu không được để trống",
+  "tryAgain": "Thử lại"
 }

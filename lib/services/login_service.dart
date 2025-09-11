@@ -7,11 +7,6 @@ import '../constants/api_constant.dart';
 
 class LoginService {
   static Future<String?> loginAuth(String username, String password) async {
-    if (username.isEmpty) {
-      return 'Tên đăng nhập không được để trống';
-    } else if (password.isEmpty) {
-      return 'Mật khẩu không được để trống';
-    }
     String endPoint = '/user/login';
     final uri = Uri.parse(ApiConstants.getUrl(endPoint));
 

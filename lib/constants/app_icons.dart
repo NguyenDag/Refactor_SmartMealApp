@@ -12,4 +12,16 @@ class AppIcons {
     color: AppColors.whiteIconColor,
     size: defaultSize,
   );
+
+  static Icon get restaurant => Icon(
+    Icons.restaurant,
+    color: AppColors.iconColor,
+    size: 40,
+  );
+
+  static Icon get error => Icon(
+    Icons.error,
+    color: AppColors.error,
+    size: 64,
+  );
 }

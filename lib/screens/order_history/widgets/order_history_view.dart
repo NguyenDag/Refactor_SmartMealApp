@@ -28,7 +28,6 @@ class _OrderHistoryScreenState extends State<OrderHistoryView> {
           listener: (context, state) { },
           child: Column(
             children: [
-              // Header với icon lịch sử và tiêu đề
               OrderHistoryHeader(),
 
               const SizedBox(height: 8),

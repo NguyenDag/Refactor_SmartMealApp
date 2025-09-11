@@ -68,7 +68,7 @@ class MealCancelButton extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              child: Text(l10n.cancel),
+              child: Text(l10n.unconfirm),
             ),
             ElevatedButton(
               onPressed: () {
@@ -78,7 +78,7 @@ class MealCancelButton extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.cancelButton,
               ),
-              child: Text(l10n.expired),
+              child: Text(l10n.cancel),
             ),
           ],
         );

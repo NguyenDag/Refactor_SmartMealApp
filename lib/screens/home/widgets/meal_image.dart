@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_meal/constants/api_constant.dart';
+import 'package:smart_meal/constants/app_icons.dart';
 
 import '../../../constants/app_colors.dart';
 
@@ -32,14 +33,10 @@ class MealImage extends StatelessWidget {
                   );
                 },
                 errorBuilder: (context, error, stackTrace) {
-                  return Icon(
-                    Icons.restaurant,
-                    size: 40,
-                    color: AppColors.iconColor,
-                  );
+                  return AppIcons.restaurant;
                 },
               )
-              : Icon(Icons.restaurant, size: 40, color: AppColors.iconColor),
+              : AppIcons.restaurant,
     );
   }
 }

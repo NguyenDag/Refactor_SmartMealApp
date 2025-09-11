@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_meal/constants/app_colors.dart';
+import 'package:smart_meal/constants/app_icons.dart';
 import 'package:smart_meal/models/food_item_model.dart';
 
 import '../../../blocs/meal/home/meal_bloc.dart';
@@ -37,7 +38,7 @@ class WeeklyMealsBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error, size: 64, color: AppColors.error),
+                AppIcons.error,
                 SizedBox(height: 16),
                 Text(
                   state.message,

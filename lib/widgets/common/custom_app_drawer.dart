@@ -16,7 +16,7 @@ class CustomAppDrawer extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Drawer(
       child: Container(
-        color: Colors.white,
+        color: AppColors.white,
         child: Column(
           children: [
             // Header của drawer

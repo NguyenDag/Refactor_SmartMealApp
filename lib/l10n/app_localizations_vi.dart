@@ -193,4 +193,13 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get unconfirm => 'Hủy bỏ';
+
+  @override
+  String get usernameRequired => 'Tên tài khoản không được để trống';
+
+  @override
+  String get passwordRequired => 'Mật khẩu không được để trống';
+
+  @override
+  String get tryAgain => 'Thử lại';
 }

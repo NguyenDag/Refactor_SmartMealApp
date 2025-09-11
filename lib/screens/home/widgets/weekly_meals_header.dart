@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_meal/blocs/meal/home/meal_bloc.dart';
+import 'package:smart_meal/blocs/meal/home/meal_state.dart';
 import 'package:smart_meal/constants/app_colors.dart';
+import 'package:smart_meal/constants/app_images.dart';
 
 import '../../../l10n/app_localizations.dart';
 
@@ -15,16 +19,52 @@ class WeeklyMealsHeader extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(16),
-          child: Text(
-            l10n.welcomeUser("Thanh"),
-            style: TextStyle(fontSize: 13, color: AppColors.textPrimary),
+          child: BlocBuilder<MealBloc, MealState>(
+            builder: (context, state) {
+              if (state is MealLoading) {
+                return Row(
+                  children: [
+                    SizedBox(
+                      width: 12,
+                      height: 12,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      l10n.welcomeUser("..."),
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ],
+                );
+              }
+
+              String userName = "User"; // Default fallback
+              if (state is MealLoaded) {
+                userName = state.userInfo.fullName;
+              }
+
+              return Text(
+                l10n.welcomeUser(userName),
+                style: TextStyle(fontSize: 13, color: AppColors.textPrimary),
+              );
+            },
           ),
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              Icon(Icons.restaurant_menu, color: AppColors.iconColor, size: 24),
+              Image.asset(
+                AppImages.menuIcon,
+                width: 24,
+                height: 24,
+              ),
               SizedBox(width: 8),
               Text(
                 l10n.weeklyMeals,

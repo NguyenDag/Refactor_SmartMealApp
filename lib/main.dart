@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    Locale locale = const Locale('en');
+    Locale locale = const Locale('vi');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 

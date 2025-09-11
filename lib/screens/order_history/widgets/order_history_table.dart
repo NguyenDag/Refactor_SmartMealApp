@@ -5,6 +5,7 @@ import 'package:smart_meal/blocs/meal/order_history/order_history_event.dart';
 import 'package:smart_meal/blocs/meal/order_history/order_history_state.dart';
 
 import '../../../constants/app_colors.dart';
+import '../../../constants/app_icons.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../models/ordered_food_item_model.dart';
 import 'order_history_table_content.dart';
@@ -110,7 +111,7 @@ class OrderHistoryTable extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error, size: 64, color: AppColors.error),
+                AppIcons.error,
                 SizedBox(height: 16),
                 Text(
                   state.message,
@@ -121,7 +122,7 @@ class OrderHistoryTable extends StatelessWidget {
                   onPressed: () {
                     context.read<OrderHistoryBloc>().add(LoadOrderHistory());
                   },
-                  child: Text('Thử lại'),
+                  child: Text(l10n.tryAgain),
                 ),
               ],
             ),
